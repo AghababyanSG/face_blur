@@ -1,12 +1,20 @@
 import cv2
-import imutils
+# import imutils
 
 # Initializing the HOG person
 hog = cv2.HOGDescriptor()
 hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 
+
+#FIXME: esi a et sharpeni methody
+# kernel = np.array([[0, -1, 0],
+#                    [-1, 5,-1],
+#                    [0, -1, 0]])
+# image_sharp = cv2.filter2D(src=image, ddepth=-1, kernel=kernel)
+
 # Reading the Image
-image = cv2.imread('Textures/kendall.jpg')
+# image = cv2.imread('Textures/11.jpg', 0)
+image = cv2.resize(cv2.imread('Textures/11.jpg', 0), [1260, 914])
 
 # Resizing the Image
 # image = imutils.resize(image,
@@ -14,7 +22,7 @@ image = cv2.imread('Textures/kendall.jpg')
 
 # Detecting all humans
 (humans, _) = hog.detectMultiScale(image,
-                                   winStride=(5, 5),
+                                   winStride=(3, 3),
                                    padding=(3, 3),
                                    scale=1.21)
 # getting no. of human detected
